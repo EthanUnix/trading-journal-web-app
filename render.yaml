@@ -19,11 +19,7 @@ services:
         value: mongodb+srv://lollyethan25:X%3DS%5DqZiQYWvOn%3A%2FT@cluster0.7tdlzki.mongodb.net/trading_journal?retryWrites=true&w=majority&appName=Cluster0
       - key: LOG_LEVEL
         value: info
-      - key: CLIENT_URL
-        fromService:
-          name: trading-journal-client
-          type: web
-          envVarKey: RENDER_EXTERNAL_URL
+      # Remove the CLIENT_URL reference temporarily
     healthCheckPath: /api/v1/health
 
   # Frontend React app with Express server
