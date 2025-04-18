@@ -53,6 +53,8 @@ app.use('/api/v1/trades', trades);
 app.use('/api/v1/missed-trades', missedTrades);
 app.use('/api/v1/broker-accounts', brokerAccounts);
 app.use('/api/v1', health);
+const healthRoutes = require('./routes/health');
+app.use('/api/v1/health', healthRoutes);
 
 // Serve static assets in production
 if (config.env === 'production') {
