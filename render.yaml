@@ -3,6 +3,7 @@ services:
   - type: web
     name: trading-journal-api
     env: node
+    plan: free
     buildCommand: cd server && npm install
     startCommand: cd server && npm start
     envVars:
@@ -26,11 +27,11 @@ services:
     healthCheckPath: /api/v1/health
 
   # Frontend static site
-  - type: web
+  - type: static
     name: trading-journal-client
-    env: static
+    plan: free
     buildCommand: cd client && npm install && npm run build
-    staticPublishPath: ./client/build
+    publishPath: client/build
     routes:
       - type: rewrite
         source: /*
