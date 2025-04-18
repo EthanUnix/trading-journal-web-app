@@ -27,7 +27,7 @@ services:
     healthCheckPath: /api/v1/health
 
   # Frontend static site
-  - type: static
+  - type: web
     name: trading-journal-client
     plan: free
     buildCommand: cd client && npm install && npm run build
