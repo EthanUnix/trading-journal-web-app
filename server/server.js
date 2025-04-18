@@ -21,6 +21,7 @@ const auth = require('./routes/auth');
 const trades = require('./routes/trades');
 const missedTrades = require('./routes/missedTrades');
 const brokerAccounts = require('./routes/brokerAccounts');
+const health = require('./routes/health');
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.use(helmet());
 
 // CORS
 app.use(cors({
-  origin: config.clientURL,
+  origin: [config.clientURL, config.netlifyURL],
   credentials: true
 }));
 
@@ -51,6 +52,7 @@ app.use('/api/v1/auth', auth);
 app.use('/api/v1/trades', trades);
 app.use('/api/v1/missed-trades', missedTrades);
 app.use('/api/v1/broker-accounts', brokerAccounts);
+app.use('/api/v1', health);
 
 // Serve static assets in production
 if (config.env === 'production') {

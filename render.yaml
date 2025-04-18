@@ -11,12 +11,19 @@ services:
       - key: PORT
         value: 10000
       - key: JWT_SECRET
-        sync: false
+        value: trading_journal_secure_secret_key_2025
       - key: JWT_EXPIRE
         value: 24h
       - key: MONGO_URI
-        sync: false
-    healthCheckPath: /api/health
+        value: mongodb+srv://lollyethan25:X%3DS%5DqZiQYWvOn%3A%2FT@cluster0.7tdlzki.mongodb.net/trading_journal?retryWrites=true&w=majority&appName=Cluster0
+      - key: LOG_LEVEL
+        value: info
+      - key: CLIENT_URL
+        fromService:
+          name: trading-journal-client
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+    healthCheckPath: /api/v1/health
 
   # Frontend static site
   - type: web
@@ -34,3 +41,4 @@ services:
           name: trading-journal-api
           type: web
           envVarKey: RENDER_EXTERNAL_URL
+        suffix: /api/v1

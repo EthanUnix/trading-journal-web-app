@@ -8,5 +8,6 @@ module.exports = {
   jwtSecret: process.env.JWT_SECRET || 'trading_journal_secret_key_change_in_production',
   jwtExpire: process.env.JWT_EXPIRE || '24h',
   logLevel: process.env.LOG_LEVEL || 'info',
-  clientURL: process.env.CLIENT_URL || 'http://localhost:3000'
+  clientURL: process.env.CLIENT_URL || 'http://localhost:3000',
+  netlifyURL: process.env.NETLIFY_URL || 'https://trading-journal-client.netlify.app'
 };
