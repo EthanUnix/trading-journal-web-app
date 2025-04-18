@@ -1,19 +1,10 @@
-# Health Check Endpoint for Render
-
+// server/routes/health.js
 const express = require('express');
 const router = express.Router();
 
-/**
- * @route   GET /api/v1/health
- * @desc    Health check endpoint for Render
- * @access  Public
- */
-router.get('/health', (req, res) => {
-  res.status(200).json({
-    status: 'success',
-    message: 'API is running',
-    timestamp: new Date().toISOString()
-  });
+// Health check endpoint for Render
+router.get('/', (req, res) => {
+  res.status(200).json({ status: 'OK', message: 'API is healthy' });
 });
 
 module.exports = router;
