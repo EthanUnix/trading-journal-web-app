@@ -26,20 +26,19 @@ services:
           envVarKey: RENDER_EXTERNAL_URL
     healthCheckPath: /api/v1/health
 
-  # Frontend static site
-  - type: static
+  # Frontend React app with Express server
+  - type: web
     name: trading-journal-client
+    env: node
     plan: free
     buildCommand: cd client && npm install && npm run build
-    publishPath: client/build
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    startCommand: cd client && node server.js
     envVars:
+      - key: NODE_ENV
+        value: production
       - key: REACT_APP_API_URL
         fromService:
           name: trading-journal-api
           type: web
           envVarKey: RENDER_EXTERNAL_URL
-        suffix: /api/v1
+          suffix: /api/v1
