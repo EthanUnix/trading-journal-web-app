@@ -1,0 +1,36 @@
+services:
+  # Backend API service
+  - type: web
+    name: trading-journal-api
+    env: node
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRE
+        value: 24h
+      - key: MONGO_URI
+        sync: false
+    healthCheckPath: /api/health
+
+  # Frontend static site
+  - type: web
+    name: trading-journal-client
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: ./client/build
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          name: trading-journal-api
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
