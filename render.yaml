@@ -19,7 +19,7 @@ services:
         value: mongodb+srv://lollyethan25:X%3DS%5DqZiQYWvOn%3A%2FT@cluster0.7tdlzki.mongodb.net/trading_journal?retryWrites=true&w=majority&appName=Cluster0
       - key: LOG_LEVEL
         value: info
-      # Remove the CLIENT_URL reference temporarily
+      # Removed CLIENT_URL to fix circular dependency
     healthCheckPath: /api/v1/health
 
   # Frontend React app with Express server
@@ -27,7 +27,7 @@ services:
     name: trading-journal-client
     env: node
     plan: free
-    buildCommand: cd client && npm install && npm run build
+    buildCommand: cd client && npm install && npm run build && ls -la build
     startCommand: cd client && node server.js
     envVars:
       - key: NODE_ENV
